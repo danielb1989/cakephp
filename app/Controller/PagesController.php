@@ -35,14 +35,36 @@ class PagesController extends AppController {
  *
  * @var array
  */
+    public $helpers = array("TextFormat");
+    
     public $uses = array(
-        "Post"
+        "Post",
+        "Comment"
     );
     
     public function home() {
         $ultimasPostagens = $this->Post->find('all');
         $this->set(array(
             "ultimasPostagens" => $ultimasPostagens
+        ));
+    }
+    
+    public function post($id = null) {
+        $post = $this->Post->find('first', array(
+            'conditions' => array('Post.id' => $id)
+        ));
+        $last_posts = $this->Post->find('all', array(
+            // 'conditions' => array('Post.id' => $id),
+            'limit' => 5
+        ));
+        $comments = $this->Comment->find('all', array(
+            'conditions' => array('Comment.post_id' => $id),
+            'limit' => 5
+        ));
+        $this->set(array(
+            'post' => $post,
+            'last_posts' => $last_posts,
+            'comments' => $comments
         ));
     }
 

@@ -1,9 +1,9 @@
 
-Comando para instalação: <br>
+Comandos para instalação: <br>
 
-´git clone -b 2.x git://github.com/cakephp/cakephp.git´ <br>
+`git clone https://github.com/danielb1989/cakephp.git` <br>
 
-Instalação e Configuração [Link](https://book.cakephp.org/2/pt/installation.html)
+`CREATE SCHEMA `cake_blog_tutorial` DEFAULT CHARACTER SET utf8; ` <br>
 
 <hr>
 

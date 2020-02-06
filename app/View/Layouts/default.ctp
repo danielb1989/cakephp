@@ -62,7 +62,7 @@
       
     <footer>
         <div class="container">
-            <p>&copy; 2016 Company, Inc.</p>
+            <p>Blog com CakePHP  - &copy; 2016 Company, Inc.</p>
         </div>
     </footer>
     

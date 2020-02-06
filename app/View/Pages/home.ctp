@@ -12,7 +12,7 @@
             <div class="col-md-4">
                 <h2><?php echo $post['Post']['title']; ?></h2>
                 <p><?php echo $post['Post']['body']; ?></p>
-                <p><?php echo $this->Html->link("Ver detalhes", array('controller' => 'posts', 'action' => 'view', $post['Post']['id']), array("class" => "btn btn-default"));?></p>
+                <p><?php echo $this->Html->link("Ver detalhes", array('action' => 'post', $post['Post']['id']), array("class" => "btn btn-default"));?></p>
             </div>
         <?php endforeach; ?>
     </div>
