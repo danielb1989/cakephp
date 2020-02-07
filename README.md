@@ -1,13 +1,14 @@
+# Blog com CakePHP 2x
 
-Comandos para instalação: <br>
+Blog com CakePHP 2x e MySQL. Usuários, Posts e Comentários. <br>
 
-`git clone https://github.com/danielb1989/cakephp.git` <br>
+Instalação: `git clone https://github.com/danielb1989/cakephp.git` <br>
 
-`CREATE SCHEMA `cake_blog_tutorial` DEFAULT CHARACTER SET utf8; ` <br>
+Criar banco de dados cake_blog_tutorial: `CREATE SCHEMA `cake_blog_tutorial` DEFAULT CHARACTER SET utf8;` <br>
 
-Importar banco de dados em: `cakephp/_banco-de-dados/banco-de-dados.sql` no banco de dados acima.<br>
+Importar banco de dados em: `cakephp/_banco-de-dados/banco-de-dados.sql` no banco de dados criado acima.<br>
 
-Usuário para testes: Login: admin - Senha: 123456.<br>
+Usuário para testes: admin - 123456<br>
 
 <hr>
 
