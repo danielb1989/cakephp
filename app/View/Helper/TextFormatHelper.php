@@ -43,7 +43,28 @@
             return $html;
         }
         
-        public function cortaTexto($string, $limit = null){
+        public function convertDateToText($data = null, $formato = null) {
+            try {
+                if(empty($data)) {
+                    throw new Exception;
+                }
+                if($data == "0000-00-00") {
+                    throw new Exception;
+                }
+                if($data == "0000-00-00 00:00:00") {
+                    throw new Exception;
+                }
+                if(empty($formato)) {
+                    $formato = "d/m/Y";
+                }
+                $a = date($formato, strtotime($data));
+                return $a;
+            } catch (Exception $e) {
+                return "";
+            }
+        }
+        
+        public function cortaTexto($string, $limit = null) {
             $tam = strlen($string);
             $max = isset($limit) ? $limit : 50;
             if($tam > $max){

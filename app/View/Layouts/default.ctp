@@ -41,30 +41,20 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <form class="navbar-form navbar-right">
-                    <div class="form-group">
-                        <input type="text" placeholder="Email" class="form-control">
-                    </div>
-                    <div class="form-group">
-                        <input type="password" placeholder="Password" class="form-control">
-                    </div>
-                    <button type="submit" class="btn btn-success">Sign in</button>
+                    <?php echo $this->Html->link("Fazer Login", array('controller' => 'painel', 'action' => 'login'), array("class" => "btn btn-success")); ?>
                 </form>
             </div>
         </div>
     </nav>
-      
     <div id="content">
         <?php echo $this->Flash->render(); ?>
         <?php echo $this->fetch('content'); ?>
     </div>
-      
     <hr>
-      
     <footer>
         <div class="container">
             <p>Blog com CakePHP  - &copy; 2016 Company, Inc.</p>
         </div>
     </footer>
-    
   </body>
 </html>

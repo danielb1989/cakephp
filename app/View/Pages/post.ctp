@@ -2,7 +2,8 @@
     <div class="row">
         <div class="col-md-9">
             <h1><?php echo $post['Post']['title']; ?></h1>
-            <p><small>Created: <?php echo $post['Post']['created']; ?></small></p>
+            <p><small>Criado em: <?php echo $this->TextFormat->convertDateToText($post['Post']['created']); ?> ás
+                    <?php echo $this->TextFormat->convertDateToText($post['Post']['created'], "H:i"); ?></small></p>
             <p><?php echo $post['Post']['body']?></p>
             <hr>
             <?php echo $this->Session->flash(); ?>
@@ -58,7 +59,7 @@
                 echo $this->Form->end();
             ?>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 sidebar-blog">
             <div class="list-group">
             <?php 
                 foreach ($last_posts as $post_list):

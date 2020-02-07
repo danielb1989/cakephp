@@ -1,62 +1,80 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-    <head>
-        <meta charset="utf-8">
-        <title><?php echo $title_page; ?> - Prime System</title>
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="robots" content="noindex, nofollow">
-        <?php
-        echo $this->Html->meta("icon", "icon/favicon.png");
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title><?php echo $this->fetch('title'); ?> - Blog com CakePHP</title>
+    <?php
+        echo $this->Html->meta("icon", "icon/favicon.ico");
         echo $this->Html->css(array(
-            "bootstrap.min",
-            "datepicker.min",
-            "clockpicker.min",
-            "select2.min"
-        ));
-        echo $this->Html->css(array(
-            "print.min"
-        ), array(
-            "media" => "print"
+            "bootstrap.min"
         ));
         echo $this->fetch("css");
         echo $this->Html->css(array(
-            "main.style"
+            "main.style",
+            "painel"
         ));
         echo $this->Html->script(array(
             "jquery-1.11.2.min",
-            "bootstrap.min",
-            "bootbox.min",
-            "bootstrap-datepicker.min",
-            "locales/bootstrap-datepicker.pt-BR",
-            "clockpicker.min",
-            "jquery.mask.min",
-            "jquery.validate/jquery.validate.min",
-            "jquery.validate/additional-methods",
-            "jquery.form.min",
-            "select2-3.4.5/select2.min",
-            "select2-3.4.5/select2_locale_pt-BR",
-            "tinymce/tinymce.min"
+            "bootstrap.min"
         ));
         echo $this->fetch("script");
         echo $this->Html->script(array(
             "main.script"
         ));
-        ?>
-    </head>
-    <body class="body-painel">
-        <div class="menu">
+    ?>
+  </head>
+  <body>
 
-        </div>
-        <div class="main">
-            <div class="container container-pattern">
-                <?php echo $this->fetch("content"); ?>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <?php echo $this->Html->link("Painel de Controle", array('controller' => 'painel', 'action' => 'index'), array("class" => "navbar-brand")); ?>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <?php echo $this->Html->link("Visualizar Blog", array('controller' => 'pages', 'action' => 'home'), array('target' => '_blank', 'escape' => false)); ?>
+                    </li>
+                    <li><?php echo $this->Html->link("Sair do Painel", array('controller' => 'painel', 'action' => 'logout')); ?></li>
+                </ul>
+                <form class="navbar-form navbar-right">
+                    <input type="text" class="form-control" placeholder="Pesquisar...">
+                </form>
             </div>
         </div>
-        <footer class="footer">
-            <div class="container text-center footer-container">
-                Desenvolvido por <strong>Daniel Brito</strong>, <?php echo date("Y");?>.
+    </nav>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+                <ul class="nav nav-sidebar">
+                    <li>
+                        <?php echo $this->Html->link("Home", array('controller' => 'painel', 'action' => 'index')); ?>
+                    </li>
+                    <li><?php echo $this->Html->link("Usuários", array('controller' => 'users', 'action' => 'index')); ?></li>
+                    <li><?php echo $this->Html->link("Posts", array('controller' => 'posts', 'action' => 'index')); ?></li>
+                    <li><?php echo $this->Html->link("Comentários", array('controller' => 'comments', 'action' => 'index')); ?></li>
+                </ul>
+                <ul class="nav nav-sidebar">
+                    <li><?php echo $this->Html->link("Visualizar Blog", array('controller' => 'pages', 'action' => 'home'), array('target'=>'_blank','escape'=>false)); ?></li>
+                </ul>
             </div>
-        </footer>
-    </body>
+            <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+                <?php echo $this->Flash->render(); ?>
+                <?php echo $this->fetch('content'); ?>
+            </div>
+        </div>
+    </div>
+
+  </body>
 </html>

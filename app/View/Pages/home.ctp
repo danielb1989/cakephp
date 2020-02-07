@@ -6,12 +6,13 @@
     </div>
 </div>
 <div class="container">
-    <h3>Últimas Postagens</h3>
+    <h2>Últimas Postagens</h2>
+    <hr>
     <div class="row">
         <?php foreach ($ultimasPostagens as $post): ?>
             <div class="col-md-4">
-                <h2><?php echo $post['Post']['title']; ?></h2>
-                <p><?php echo $post['Post']['body']; ?></p>
+                <h4><?php echo $this->TextFormat->cortaTexto($post['Post']['title'], 30); ?></h4>
+                <p><?php echo $this->TextFormat->cortaTexto($post['Post']['body'], 100); ?></p>
                 <p><?php echo $this->Html->link("Ver detalhes", array('action' => 'post', $post['Post']['id']), array("class" => "btn btn-default"));?></p>
             </div>
         <?php endforeach; ?>
