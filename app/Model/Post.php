@@ -14,7 +14,6 @@
         );
         
         public function isOwnedBy($postId, $user) {
-            
             $post = $this->find('first', array(
                 'conditions' => array(
                     'Post.id' => $postId,

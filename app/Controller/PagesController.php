@@ -6,8 +6,7 @@
 
         public $uses = array(
             "Post",
-            "Comment",
-            "User"
+            "Comment"
         );
 
         public $components = array('Messages');

@@ -53,7 +53,11 @@
         }
 
         public function index() {
-
+            $this->set(array(
+                'posts' => $this->Post->find('count', array()), 
+                'comments' => $this->Comment->find('count', array()), 
+                'users' => $this->User->find('count', array()), 
+            ));
         }
 
     }

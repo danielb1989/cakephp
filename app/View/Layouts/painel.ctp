@@ -45,7 +45,7 @@
                     <li>
                         <?php echo $this->Html->link("Visualizar Blog", array('controller' => 'pages', 'action' => 'home'), array('target' => '_blank', 'escape' => false)); ?>
                     </li>
-                    <li><?php echo $this->Html->link("Sair do Painel", array('controller' => 'painel', 'action' => 'logout')); ?></li>
+                    <li><?php echo $this->Html->link("Sair do Painel", array('controller' => 'painel', 'action' => 'logoutSistema')); ?></li>
                 </ul>
                 <form class="navbar-form navbar-right">
                     <input type="text" class="form-control" placeholder="Pesquisar...">

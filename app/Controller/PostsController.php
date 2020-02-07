@@ -11,7 +11,9 @@
         public $helpers = array ('Html','Form');
 
         public function index() {
-            $this->set('posts', $this->Post->find('all'));
+            $this->set('posts', $this->Post->find('all', array(
+                "order" => "Post.id DESC"
+            )));
         }
 
         public function view($id = null) {
@@ -20,9 +22,9 @@
 
         public function add() {
             if ($this->request->is('post')) {
-                $this->request->data['Post']['user_id'] = $this->Auth->user('id'); // Adicionada essa linha
                 if ($this->Post->save($this->request->data)) {
-                    $this->Flash->success('Your post has been saved.');
+                    $mensagem = $this->Messages->alert('Post <strong>'.$this->request->data["Post"]["title"].'</strong> criado com sucesso.', 1);
+                    $this->Session->setFlash($mensagem);
                     $this->redirect(array('action' => 'index'));
                 }
             }
@@ -34,7 +36,7 @@
                 $this->request->data = $this->Post->findById($id);
             } else {
                 if ($this->Post->save($this->request->data)) {
-                    $this->Flash->success('Your post has been updated.');
+                    $this->Session->setFlash($this->Messages->alert('Post <strong>'.$this->request->data["Post"]["title"].'</strong> editado com sucesso.', 1));
                     $this->redirect(array('action' => 'index'));
                 }
             }
@@ -45,7 +47,7 @@
                 throw new MethodNotAllowedException();
             }
             if ($this->Post->delete($id)) {
-                $this->Flash->success('The post with id: ' . $id . ' has been deleted.');
+                $this->Session->setFlash($this->Messages->alert('Post <strong>' . $id . '</strong> deletado com sucesso.', 2));
                 $this->redirect(array('action' => 'index'));
             }
         }
@@ -53,7 +55,6 @@
         public function isAuthorized($user) {
             if (parent::isAuthorized($user)) {
                 if ($this->action === 'add') {
-                    // Todos os usuários registrados podem criar posts
                     return true;
                 }
                 if (in_array($this->action, array('edit', 'delete'))) {

@@ -5,15 +5,18 @@
 <table class="table table-condensed table-hover">
     <tr>
         <th>Id</th>
-        <th>Title</th>
-        <th>Actions</th>
+        <th>Título</th>
+        <th>Opções</th>
         <th>Created</th>
     </tr>
     <?php foreach ($posts as $post): ?>
         <tr>
             <td><?php echo $post['Post']['id']; ?></td>
             <td>
-                <?php echo $this->Html->link($post['Post']['title'], array('action' => 'view', $post['Post']['id']));?>
+                <?php echo $this->Html->link($post['Post']['title'], 
+                    array('controller' => 'pages', 'action' => 'post', $post['Post']['id']), 
+                    array('target' => '_blank', 'escape' => false)); 
+                ?>
             </td>
             <td>
                 <?php echo $this->Html->link('Editar', array('action' => 'edit', $post['Post']['id'])); ?>
@@ -21,7 +24,7 @@
                 <?php echo $this->Form->postLink(
                     'Deletar',
                     array('action' => 'delete', $post['Post']['id']),
-                    array('confirm' => 'Are you sure?'));
+                    array('confirm' => 'Você tem certeza?'));
                 ?>
             </td>
             <td><?php echo $post['Post']['created']; ?></td>

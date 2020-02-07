@@ -8,26 +8,7 @@
         
         public $layout = "painel";
         
-        public $uses = array(
-            "User"
-        );
-
-        public function beforeFilter() {
-            // parent::beforeFilter();
-            // $this->Auth->allow('add');
-        }
-
-//        public function login() {
-//            if ($this->Auth->login()) {
-//                $this->redirect($this->Auth->redirect());
-//            } else {
-//                $this->Flash->error(__('Invalid username or password, try again'));
-//            }
-//        }
-//
-//        public function logout() {
-//            $this->redirect($this->Auth->logout());
-//        }
+        public $uses = array();
 
         public function index() {
             $this->set('users', $this->User->find('all', array(
@@ -35,63 +16,55 @@
             )));
         }
 
-        public function view($id = null) {
-//            if (!$this->User->exists($id)) {
-//                throw new NotFoundException(__('Invalid user'));
-//            }
-//            $this->set('user', $this->User->findById($id));
-        }
-
         public function add() {
             if ($this->request->is('post')) {
-                
-
-                
-                // debug($this->User->create());
-                // debug($this->request->data);
-                
-                
-//                if ($this->User->save($this->request->data)) {
-//                    $this->Flash->success(__('The user has been saved'));
-//                    $this->redirect(array('action' => 'index'));
-//                } else {
-//                    $this->Flash->error(__('The user could not be saved. Please, try again.'));
-//                }
+                if ($this->User->save($this->request->data)) {
+                    $this->Session->setFlash($this->Messages->alert('Usuário <strong>'.$this->request->data["User"]["username"].'</strong> salvo com sucesso.', 1));
+                    $this->redirect(array('action' => 'index'));
+                } else {
+                    $this->Session->setFlash($this->Messages->alert('Não foi possível criar o usuário. Por favor, tente novamente mais tarde.', 2));
+                }
             }
         }
 
         public function edit($id = null) {
-            $this->User->id = $id;
-            if (!$this->User->exists()) {
-                throw new NotFoundException(__('Invalid user'));
-            }
-            if ($this->request->is('post') || $this->request->is('put')) {
-                if ($this->User->save($this->request->data)) {
-                    $this->Flash->success(__('The user has been saved'));
-                    $this->redirect(array('action' => 'index'));
+            try {
+                $this->User->id = $id;
+                if($this->request->is('get')) {
+                    $this->request->data = $this->User->findById($id);
                 } else {
-                    $this->Flash->error(__('The user could not be saved. Please, try again.'));
+                    if ($this->User->save($this->request->data)) {
+                        $this->Session->setFlash($this->Messages->alert('Usuário <strong>'.$this->request->data["User"]["username"].'</strong> editado com sucesso.', 1));
+                        $this->redirect(array('action' => 'index'));
+                    }
                 }
-            } else {
-                $this->request->data = $this->User->findById($id);
-                unset($this->request->data['User']['password']);
+            } catch (Exception $exc) {
+                $this->Session->setFlash($this->Messages->alert($exc->getMessage(), 2));
+                $this->redirect(array('action' => 'index'));
             }
         }
 
         public function delete($id = null) {
-            if (!$this->request->is('post')) {
-                throw new MethodNotAllowedException();
-            }
-            $this->User->id = $id;
-            if (!$this->User->exists()) {
-                throw new NotFoundException(__('Invalid user'));
-            }
-            if ($this->User->delete()) {
-                $this->Flash->success(__('User deleted'));
+            try {
+                if(!$this->request->is('post')) {
+                    throw new Exception('Você não pode excluir esse usuário.');
+                }
+                if($id == 1) {
+                    throw new Exception('Você não pode excluir esse usuário.');
+                }
+                $this->User->id = $id;
+                if (!$this->User->exists()) {
+                    throw new Exception('O usuário não existe.');
+                }
+                if (!$this->User->delete()) {
+                    throw new Exception('Não foi possível excluir o usuário.');
+                }
+                $this->Session->setFlash($this->Messages->alert('Usuário <strong>' . $id . '</strong> deletado com sucesso.', 2));
+                $this->redirect(array('action' => 'index'));
+            } catch (Exception $exc) {
+                $this->Session->setFlash($this->Messages->alert($exc->getMessage(), 2));
                 $this->redirect(array('action' => 'index'));
             }
-            $this->Flash->error(__('User was not deleted'));
-            $this->redirect(array('action' => 'index'));
         }
 
     }

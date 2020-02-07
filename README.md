@@ -5,6 +5,10 @@ Comandos para instalação: <br>
 
 `CREATE SCHEMA `cake_blog_tutorial` DEFAULT CHARACTER SET utf8; ` <br>
 
+Importar banco de dados em: `cakephp/_banco-de-dados/banco-de-dados.sql` no banco de dados acima.<br>
+
+Usuário para testes: Login: admin - Senha: 123456.<br>
+
 <hr>
 
 # CakePHP
